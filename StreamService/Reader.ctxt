@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Reader
+comment1.params=
+comment1.target=Reader()
+comment2.params=
+comment2.target=void\ readFilms()
+comment3.params=
+comment3.target=void\ readSeries()
+numComments=4
