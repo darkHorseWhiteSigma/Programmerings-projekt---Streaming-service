@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ImageComponent
+comment1.params=img
+comment1.target=ImageComponent(java.awt.image.BufferedImage)
+comment2.params=g
+comment2.target=void\ paint(java.awt.Graphics)
+comment3.params=
+comment3.target=java.awt.Dimension\ getPreferredSize()
+numComments=4
