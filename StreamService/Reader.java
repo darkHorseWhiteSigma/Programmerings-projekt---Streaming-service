@@ -107,6 +107,9 @@ public class Reader{
     
     public void addUser(String name, String password, boolean adult){
         users.add(new User(name, password, adult));
+        if(users.size() == 1){
+            users.get(0).setAdministrator();
+        }
     }
     
     public User login(String name, String password){
@@ -117,5 +120,15 @@ public class Reader{
         }
         System.out.println("Wrong username or password");
         return null;
+    }
+    
+    public void newAdministrator(User administrator, User notAdministrator){
+        if(administrator.isAdministrator() == true){
+            notAdministrator.setAdministrator();
+        }
+        else{
+            System.out.println("You must be an administrator to promote others to administrator");
+        }
+        
     }
 }

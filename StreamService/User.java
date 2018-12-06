@@ -11,4 +11,16 @@ public class User {
         this.password = password;
         this.adult = adult;
     }
+    
+    public void addFavorite(Media favorite){
+        favorites.add(favorite);
+    }
+    
+    public void setAdministrator(){
+        administrator = true;
+    }
+    
+    public boolean isAdministrator(){
+        return administrator;
+    }
 }

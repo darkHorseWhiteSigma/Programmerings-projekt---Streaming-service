@@ -14,4 +14,6 @@ comment6.params=name\ password\ adult
 comment6.target=void\ addUser(java.lang.String,\ java.lang.String,\ boolean)
 comment7.params=name\ password
 comment7.target=User\ login(java.lang.String,\ java.lang.String)
-numComments=8
+comment8.params=administrator\ notAdministrator
+comment8.target=void\ newAdministrator(User,\ User)
+numComments=9

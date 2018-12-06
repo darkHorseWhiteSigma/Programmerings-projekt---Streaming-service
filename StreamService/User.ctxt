@@ -2,4 +2,10 @@
 comment0.target=User
 comment1.params=name\ password\ adult
 comment1.target=User(java.lang.String,\ java.lang.String,\ boolean)
-numComments=2
+comment2.params=favorite
+comment2.target=void\ addFavorite(Media)
+comment3.params=
+comment3.target=void\ setAdministrator()
+comment4.params=
+comment4.target=boolean\ isAdministrator()
+numComments=5
