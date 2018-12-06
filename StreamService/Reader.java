@@ -6,19 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reader{
-    protected ArrayList<Film> films;
-    protected ArrayList<Series> series;
+    protected ArrayList<Media> films;
+    protected ArrayList<Media> series;
+    protected ArrayList<User> users;
 
     public Reader(){
-        films = new ArrayList<Film>();
-        series = new ArrayList<Series>();
+        films = new ArrayList<Media>();
+        series = new ArrayList<Media>();
+        users = new ArrayList<User>();
     }
 
     public void readFilms() throws IOException {
-        Path current = Paths.get("");
+        Path current = Paths.get("film.txt");
         String s = current.toAbsolutePath().toString();
-        System.out.println(s);
-        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Niels\\OneDrive\\Desktop\\Projects\\StreamService\\film.txt"));
+        BufferedReader br = new BufferedReader(new FileReader(s));
         String st = br.readLine();
         while (st != null){                    
             String[] info = st.split(";");
@@ -38,10 +39,9 @@ public class Reader{
     }
 
     public void readSeries() throws IOException {
-        Path current = Paths.get("");
+        Path current = Paths.get("serie.txt");
         String s = current.toAbsolutePath().toString();
-        System.out.println(s);
-        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Niels\\OneDrive\\Desktop\\Projects\\StreamService\\serie.txt"));
+        BufferedReader br = new BufferedReader(new FileReader(s));
         String st = br.readLine();
         while (st != null){                    
             String[] info = st.split(";");
@@ -76,6 +76,46 @@ public class Reader{
             st = br.readLine();
         }
         br.close();
-
+    }
+    
+    public ArrayList<Media> sort(ArrayList<Media> medias, String genre){
+        ArrayList<Media> sorted = new ArrayList<Media>();
+        for(int i = 0; i < medias.size(); i++){
+            for(int j = 0; j < medias.get(i).getGenre().size(); j++){
+                if(medias.get(i).getGenre().get(j).contains(genre)){
+                    sorted.add(medias.get(i));
+                    System.out.println(medias.get(i).getTitle());
+                    break;
+                }
+            }
+        }
+        return sorted;
+    }
+    
+    public ArrayList<Media> search(ArrayList<Media> medias, String title){
+        ArrayList<Media> match = new ArrayList<Media>();
+        for(int i = 0; i < medias.size(); i++){
+            if(medias.get(i).getTitle().toLowerCase().contains(title.toLowerCase())){
+                match.add(medias.get(i));
+                System.out.println(medias.get(i).getTitle());
+                
+            }
+        }
+    
+        return match;
+    }
+    
+    public void addUser(String name, String password, boolean adult){
+        users.add(new User(name, password, adult));
+    }
+    
+    public User login(String name, String password){
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).name == name && users.get(i).password == password){
+                return users.get(i);
+            }
+        }
+        System.out.println("Wrong username or password");
+        return null;
     }
 }

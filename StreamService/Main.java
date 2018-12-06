@@ -8,5 +8,7 @@ public class Main{
         catch(IOException e){
             e.printStackTrace();
         }
+        Model.sort(Model.films, "Drama");
+        Model.search(Model.films, "The");
     }
 }
