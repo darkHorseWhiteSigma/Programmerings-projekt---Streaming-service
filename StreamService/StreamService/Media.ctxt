@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=Media
-comment1.params=title\ year\ genre\ rating
-comment1.target=Media(java.lang.String,\ int,\ java.util.ArrayList,\ double)
-comment2.params=
-comment2.target=java.util.ArrayList\ getGenre()
-comment3.params=
-comment3.target=java.lang.String\ getTitle()
-numComments=4
