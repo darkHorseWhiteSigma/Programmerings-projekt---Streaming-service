@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=Bruger
+comment1.params=name\ voksen\ adminstrator
+comment1.target=Bruger(java.lang.String,\ boolean,\ boolean)
+numComments=2

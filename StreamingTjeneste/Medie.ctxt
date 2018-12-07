@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Medie
+comment1.params=title\ year\ rating
+comment1.target=Medie(java.lang.String,\ int,\ double)
+comment2.params=
+comment2.target=java.lang.String\ getTitle()
+comment3.params=
+comment3.target=int\ getYear()
+comment4.params=
+comment4.target=java.util.ArrayList\ getGenre()
+comment5.params=
+comment5.target=double\ getRating()
+numComments=6
