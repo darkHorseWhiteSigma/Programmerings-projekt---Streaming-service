@@ -19,4 +19,12 @@ public abstract class Media{
     public String getTitle(){
         return title;
     }
+    
+    public int getYear(){
+        return year;
+    }
+    
+    public double getRating(){
+        return rating;
+    }
 }
