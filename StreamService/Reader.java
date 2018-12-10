@@ -1,9 +1,7 @@
 import java.nio.file.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 public class Reader{
     protected ArrayList<Media> films;
@@ -37,7 +35,10 @@ public class Reader{
     }
     br.close();
     }*/
-
+    /*
+     * Parameter: Name of file to be read from
+     * Returns: ArrayList of all films or series described in the file
+     */
     public ArrayList<Media> read(String file) throws IOException {
         Path current = Paths.get(file);
         String s = current.toAbsolutePath().toString();
@@ -51,11 +52,11 @@ public class Reader{
             String[] cat = info[2].split(","); // Genres need to be further split
             ArrayList<String> genre = new ArrayList<String>();
             for(int i = 0; i < cat.length; i++){
-                genre.add(cat[i].trim()); // Puts 
+                genre.add(cat[i].trim()); // Puts genres in an ArrayList
             }
-            double rating = Double.parseDouble(info[3].trim().replace(",","."));
-            if(st.matches(".*\\d-.*")){
-                String[] yearSplit = info[1].split("-");
+            double rating = Double.parseDouble(info[3].trim().replace(",",".")); // Replaces , with . so the rating can be stored ina  double
+            if(st.matches(".*\\d-.*")){ // Regular expression which matches with all strings containing a digit followed by -
+                String[] yearSplit = info[1].split("-"); // Splits data into beginning and end year
                 int year = Integer.parseInt(yearSplit[0].trim());
                 int endYear;
                 if(yearSplit.length == 2){
@@ -69,10 +70,10 @@ public class Reader{
                 else{
                     endYear = 0; // series ran for a year only
                 }
-                String[] sea = info[4].split(",");
+                String[] sea = info[4].split(","); 
                 ArrayList<String> seasons = new ArrayList<String>();
                 for(int i = 0; i < sea.length; i++){
-                    seasons.add(sea[i].trim());
+                    seasons.add(sea[i].trim()); //Adds seasons into ArrayList
                 }
                 f = new Series(titel,year,genre,rating,endYear,seasons);
             }
@@ -87,6 +88,10 @@ public class Reader{
         return medias;
     }
 
+    /*
+     * Parameters: ArrayList of Media to be sorted, String of genre to be sorted after
+     * Returns: ArrayList of all media containing the genre
+     */
     public ArrayList<Media> sort(ArrayList<Media> medias, String genre){
         ArrayList<Media> sorted = new ArrayList<Media>();
         for(int i = 0; i < medias.size(); i++){
@@ -101,6 +106,10 @@ public class Reader{
         return sorted;
     }
 
+    /*
+     * Parameters: ArrayList of Media to be searched from, String to be searched after
+     * Returns: ArrayList of all Media whose title containins the string
+     */
     public ArrayList<Media> search(ArrayList<Media> medias, String title){
         ArrayList<Media> match = new ArrayList<Media>();
         for(int i = 0; i < medias.size(); i++){
@@ -114,6 +123,10 @@ public class Reader{
         return match;
     }
 
+    /*
+     * Parameters: String name of user, String password of user, Boolean of whether the user is an adult
+     * Creates a new user with the specified information and adds it to an ArrayList
+     */
     public void addUser(String name, String password, boolean adult){
         users.add(new User(name, password, adult));
         if(users.size() == 1){
@@ -121,6 +134,10 @@ public class Reader{
         }
     }
 
+    /*
+     * Parameters: Username and login password
+     * Returns: if Username and password matches a user, the user is returned. If they don't, null is returned
+     */
     public User login(String name, String password){
         for(int i = 0; i < users.size(); i++){
             if(users.get(i).name == name && users.get(i).password == password){
@@ -131,6 +148,11 @@ public class Reader{
         return null;
     }
 
+    /*
+     * Parameters: A user who is supposed to be an administrator and a user who is to be promoted to one
+     * If the first user is an administrator, the second user is promoted to one
+     * If not, an error message is printed
+     */
     public void newAdministrator(User administrator, User notAdministrator){
         if(administrator.isAdministrator() == true){
             notAdministrator.setAdministrator();
@@ -141,11 +163,72 @@ public class Reader{
 
     }
 
+    /*
+     * Loads all films from the film.txt file to ArrayList films
+     */
     public void loadFilms() throws IOException{
         films = read("film.txt");
     }
 
+    /*
+     * Loads all series from the serie.txt file to ArrayList series
+     */
     public void loadSeries() throws IOException{
         series = read("serie.txt");
+    }
+
+    public ArrayList<Media> deleteMedia(String file, Media media) throws IOException{
+        ArrayList<Media> medias = read(file);
+        //medias.remove(medias.get(0));
+        for(Media e : medias){
+            if(e == media){
+                medias.remove(e);
+            }
+        }
+        return medias;
+        /*Path current = Paths.get(file);
+        String s = current.toAbsolutePath().toString();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(s));
+        PrintWriter out = new PrintWriter(bw);
+        out.print("");
+        for(int i = 0; i < medias.size(); i++){
+        writeMedia(file, medias.get(i));
+        }
+        bw.close();*/
+    }
+
+    public void writeMedia(String file, Media media) throws IOException {
+        Path current = Paths.get(file);
+        String s = current.toAbsolutePath().toString();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(s, true));
+        PrintWriter out = new PrintWriter(bw);
+        out.print(media.getTitle() + ";");
+        if(media instanceof Series){
+            out.print(Integer.toString(media.getYear()) + "-" + Integer.toString(((Series)media).getEndYear()) + ";");
+        }
+        else{
+            out.print(Integer.toString(media.getYear()) + ";");
+        }
+        for(int i = 0; i < media.getGenre().size(); i++){
+            if(i != media.getGenre().size() - 1){
+                out.print(media.getGenre().get(i) + ",");
+            }
+            else{
+                out.print(media.getGenre().get(i) + ";");
+            }
+        }
+        out.print(Double.toString(media.getRating()).replace(".",",") + ";");
+        if(media instanceof Series){
+            for(int i = 0; i < ((Series)media).getSeasons().size(); i++){
+                if(i != ((Series)media).getSeasons().size() - 1){
+                    out.print(((Series)media).getSeasons().get(i) + ",");
+                }
+                else{
+                    out.print(((Series)media).getSeasons().get(i) + ";");
+                }
+            }
+        }
+        out.println();
+        bw.close();
     }
 }
