@@ -9,4 +9,11 @@ public class Series extends Media{
         this.seasons = seasons;
     }
     
+    public int getEndYear(){
+        return endYear;
+    }
+    
+    public ArrayList<String> getSeasons(){
+        return seasons;
+    }
 }
