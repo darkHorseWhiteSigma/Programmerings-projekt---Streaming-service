@@ -4,6 +4,7 @@ public abstract class Media{
     protected int year;
     protected ArrayList<String> genre;
     protected double rating;
+    protected String picture;
     
     public Media(String title, int year, ArrayList<String> genre, double rating){
         this.title = title;
@@ -26,5 +27,9 @@ public abstract class Media{
     
     public double getRating(){
         return rating;
+    }
+    
+    public void setPicture(String picture){
+        this.picture = picture;
     }
 }

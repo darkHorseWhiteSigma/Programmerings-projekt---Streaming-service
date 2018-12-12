@@ -1,14 +1,14 @@
 import java.io.*;
 public class Main{
     public static void main(String[] args){
-        Reader Model = new Reader();
+        Model model = new Model();
         try {
-            Model.readFilms();
+            model.read("film.txt");
         }
         catch(IOException e){
             e.printStackTrace();
         }
-        Model.sort(Model.films, "Drama");
-        Model.search(Model.films, "The");
+        model.sort(model.films, "Drama");
+        model.search(model.films, "The");
     }
 }
