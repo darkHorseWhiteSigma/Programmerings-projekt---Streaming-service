@@ -1,9 +1,10 @@
 import java.util.*;
 public abstract class Media{
-    protected String title;
-    protected int year;
-    protected ArrayList<String> genre;
-    protected double rating;
+    private String title;
+    private int year;
+    private ArrayList<String> genre;
+    private double rating;
+    private String picture;
     
     public Media(String title, int year, ArrayList<String> genre, double rating){
         this.title = title;
@@ -26,5 +27,9 @@ public abstract class Media{
     
     public double getRating(){
         return rating;
+    }
+    
+    public void setPicture(String picture){
+        this.picture = picture;
     }
 }
