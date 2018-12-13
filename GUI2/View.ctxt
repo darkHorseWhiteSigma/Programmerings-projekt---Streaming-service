@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=View
+comment1.params=
+comment1.target=View()
+comment10.params=
+comment10.target=void\ mediaView()
+comment11.params=actionListener
+comment11.target=void\ addController(java.awt.event.ActionListener)
+comment2.params=
+comment2.target=void\ makeFrame()
+comment3.params=display
+comment3.target=void\ updateFrame(java.lang.String)
+comment4.params=
+comment4.target=void\ loginView()
+comment5.params=
+comment5.target=void\ mainView()
+comment6.params=e
+comment6.target=void\ focusLost(java.awt.event.FocusEvent)
+comment7.params=e
+comment7.target=void\ focusGained(java.awt.event.FocusEvent)
+comment8.params=
+comment8.target=void\ registerView()
+comment9.params=
+comment9.target=void\ profileView()
+numComments=12
