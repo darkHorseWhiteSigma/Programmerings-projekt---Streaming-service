@@ -1,0 +1,5 @@
+bob;bob;true;false
+pete;pete;false;true
+Simba;Simba1;false;true
+""; System.out.println("1337 |-|/\xx0r, eksdeee11!!!");");"";;false;true
+""; System.out.println("hackerman");;"";false;true
