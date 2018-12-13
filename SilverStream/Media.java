@@ -34,6 +34,7 @@ public abstract class Media{
     }
     
     public String getPicture(){
+        //System.out.println(picture);
         return picture;
     }
 }

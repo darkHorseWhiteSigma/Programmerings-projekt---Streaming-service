@@ -26,9 +26,11 @@ public class Controller implements ActionListener{
             case "Register" : registerButton(); break;
             case "Profile" : profileButton(); break;
             case "Media" : mediaButton(); break;
+            case "Films" : model.initialize("films"); break;
+            case "Series" : model.initialize("series") ; break;
         }
     }
-
+    
     public void registerButton() {
         model.addUser(view.getUserText().getText(), view.getPasswordText().getText(), true, false);
         view.loginView();
@@ -36,7 +38,7 @@ public class Controller implements ActionListener{
 
     public void loginButton(){
         if(model.login(view.getUserText().getText(), view.getPasswordText().getText()) != null){
-            model.initialize();
+            model.initialize("films");
         }
     }
 

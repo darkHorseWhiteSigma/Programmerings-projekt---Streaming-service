@@ -17,7 +17,7 @@ public class View extends JFrame implements Observer{
     protected JScrollPane mainScrollPane;
     protected JTextField userText;
     protected JPasswordField passwordText;
-    
+
     public View (){
         loginPanel = new JPanel();
         mainScrollPane = new JScrollPane();
@@ -25,7 +25,13 @@ public class View extends JFrame implements Observer{
 
     @Override
     public void update(Observable o, Object arg){
-        mainView((ArrayList<Media>) arg);
+        if(((String)arg).equals("films")){
+            mainView(((Model)o).getFilms());
+        }
+        else if(((String)arg).equals("series")){
+            mainView(((Model)o).getSeries());
+        }
+
     }
 
     public void makeFrame(){
@@ -116,6 +122,7 @@ public class View extends JFrame implements Observer{
         JButton buttons[] = new JButton[(medias.size())];
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         for (int i = 0; i < medias.size(); i++){
+            //System.out.println(medias.get(i).getPicture());
             buttons[i] = new JButton(new ImageIcon(medias.get(i).getPicture()));
             buttons[i].setPreferredSize( new Dimension(140, 209));
             buttons[i].setBorder(null);
@@ -127,6 +134,8 @@ public class View extends JFrame implements Observer{
 
         JButton filmsButton = new JButton("Films");
         filmsButton.setPreferredSize( new Dimension(50, 50));
+        filmsButton.setActionCommand("Films");
+        filmsButton.addActionListener(actionListener);
         panel2.add(filmsButton);
 
         /*filmsButton.addActionListener(new ActionListener() {
@@ -137,6 +146,8 @@ public class View extends JFrame implements Observer{
          */
         JButton seriesButton = new JButton("Series");
         seriesButton.setPreferredSize( new Dimension(50, 50));
+        seriesButton.setActionCommand("Series");
+        seriesButton.addActionListener(actionListener);
         panel2.add(seriesButton);
 
         /*seriesButton.addActionListener(new ActionListener() {
@@ -252,14 +263,13 @@ public class View extends JFrame implements Observer{
         JComboBox g = new JComboBox(genre);
         g.setBounds(120, 70, 160, 25);
         panel.add(g);
-        
+
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(180, 110, 80, 25);
         registerButton.setActionCommand("Register");
         registerButton.addActionListener(actionListener);
         panel.add(registerButton);
 
-        
         
         registerPanel = panel;
         updateFrame("Register");
@@ -324,11 +334,11 @@ public class View extends JFrame implements Observer{
     public void addController(ActionListener actionListener){
         this.actionListener = actionListener;
     }
-    
+
     public JTextField getUserText(){
         return userText;
     }
-    
+
     public JPasswordField getPasswordText(){
         return passwordText;
     }

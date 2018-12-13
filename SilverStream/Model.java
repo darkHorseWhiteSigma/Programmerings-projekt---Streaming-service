@@ -23,9 +23,9 @@ public class Model extends Observable{
         series = addPictures(series, "Series");
     }
 
-    public void initialize(){
+    public void initialize(String type){
         setChanged();
-        notifyObservers(films);
+        notifyObservers(type);
     }
 
     /*
@@ -273,6 +273,8 @@ public class Model extends Observable{
         String s = current.toAbsolutePath().toString();
         File f = new File(s);
         File[] fs = f.listFiles();
+        System.out.println(fs[1].toString());
+        System.out.println(medias.get(20).getTitle());
         for(int i = 0; i < medias.size(); i++){
             for(int j = 0; j < fs.length; j++){
                 if(fs[j].toString().contains(medias.get(i).getTitle())){
@@ -345,5 +347,9 @@ public class Model extends Observable{
 
     public ArrayList<Media> getFilms(){
         return films;
+    }
+
+    public ArrayList<Media> getSeries(){
+        return series;
     }
 }
